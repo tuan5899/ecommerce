@@ -1,10 +1,16 @@
 import re
 from django.shortcuts import render
 from .models import *
+from django.views import generic
 from django.http import JsonResponse
 import json
 import datetime
 # Create your views here.
+
+class ProdcutDetails(generic.DetailView):
+    model = Product
+    template_name = 'store/product_details.html'
+    context_object_name = 'product'
 
 def store(request):
     if request.user.is_authenticated:

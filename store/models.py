@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.forms import ImageField
-
+from django.urls import reverse
 # Create your models here.
 
 class Customer(models.Model):
@@ -17,6 +17,11 @@ class Product(models.Model):
     price = models.IntegerField()
     digital = models.BooleanField(default=False, null = True, blank = False)
     image = models.ImageField(null = True, blank = True)
+    author = models.CharField(max_length=200, null = True)
+    description = models.CharField(max_length=10000, null = True)
+
+    def get_absolute_url(self):
+        return reverse('store:product_details', kwargs={'slug': self.slug})
     
     def __str__(self):
         return self.name
